@@ -8,43 +8,38 @@ const FooterTop = () => {
                     <div className="m-5">
                         <img
                         className="w-full md:w-2/3"
-                            src="https://i.ibb.co/ZVJXcnq/Ibnu-Medical-Center-Logo.png"
+                            src="https://static.vecteezy.com/system/resources/thumbnails/032/524/550/small_2x/kidney-bean-icon-vector.jpg"
                             alt=""
+                            style={{height:180,width:150}}
                         />
                         <p className="py-4 text-lg">
-                            Our goal is to deliver quality of care in a
-                            courteous, respectful, and compassionate manner. We
-                            hope you will allow us to care for you and strive to
-                            be the first and best choice for your family
-                            healthcare.
+                            Our mission is to raise awareness about sickle cell disease and provide support to those affected. 
+                            We strive to be a trusted resource for patients and families navigating this condition.
                         </p>
                     </div>
 
                     <div className="border mx-10 md:mx-0 rounded-lg p-8">
                         <div className="text-center">
-                            <h2 className="text-2xl">Quick Contacts</h2>
+                            <h2 className="text-2xl">Get Involved</h2>
                             <p className="pb-5">
-                                If you have any questions or need help, feel
-                                free to contact with our team.
+                                Join our efforts in raising awareness and supporting sickle cell patients. 
+                                Your involvement can make a difference!
                             </p>
-                            <h2 className="text-4xl">01061245741</h2>
+                            <h2 className="text-4xl">Contact Us</h2>
                             <p>
-                                2307 Beverley Rd Brooklyn, New York 11226 United
-                                States.
+                                Email: support@sicklecellawareness.org
                             </p>
                         </div>
                     </div>
                     <div className="border mx-10 md:mx-0 rounded-lg p-8">
                         <div className="text-center">
-                            <h2 className="text-2xl">Quick Contacts</h2>
+                            <h2 className="text-2xl">Resources</h2>
                             <p className="pb-5">
-                                If you have any questions or need help, feel
-                                free to contact with our team.
+                                Access valuable resources and information about sickle cell disease, treatment options, and support groups.
                             </p>
-                            <h2 className="text-4xl">01061245741</h2>
+                            <h2 className="text-4xl">Call Us</h2>
                             <p>
-                                2307 Beverley Rd Brooklyn, New York 11226 United
-                                States.
+                                Phone: 1-800-555-0199
                             </p>
                         </div>
                     </div>

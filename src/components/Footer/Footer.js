@@ -6,7 +6,7 @@ const Footer = () => {
         <div className="bg-white">
             <FooterTop></FooterTop>
             <p className="text-center m-5 pb-5 text-xl">
-                Copyright &copy; 2021 | All Right Reserved!
+                Copyright &copy; 2024 | All Right Reserved!
             </p>
         </div>
     );

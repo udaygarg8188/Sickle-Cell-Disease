@@ -5,10 +5,10 @@ import TopHeader from './TopHeader/TopHeader';
 const Header = () => {
     return (
         <div className="relative">
-            <div className="container mx-auto">
+            {/* <div className="container mx-auto">
                 <TopHeader></TopHeader>
-            </div>
-            <hr />
+            </div> */}
+            {/* <hr /> */}
             <ResponsiveHeader></ResponsiveHeader>
         </div>
     );

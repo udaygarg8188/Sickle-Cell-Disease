@@ -14,6 +14,7 @@ import SingleServiceDetails from './components/pages/SingleServiceDetails/Single
 import PrivateRoute from './components/routes/PrivateRoute';
 import SignUp from './components/SignUp/SignUp';
 import AuthProvider from './contexts/AuthProvider';
+import Chatbot from './components/Chatbot/Chatbot';
 
 function App() {
     return (
@@ -56,6 +57,7 @@ function App() {
                     <Footer></Footer>
                 </Router>
             </AuthProvider>
+            <Chatbot />
         </div>
     );
 }

@@ -18,8 +18,9 @@ const ResponsiveHeader = ({ fixed }) => {
                                     to="/"
                                 >
                                     <img
-                                        src="https://i.ibb.co/ZVJXcnq/Ibnu-Medical-Center-Logo.png"
+                                        src="https://static.vecteezy.com/system/resources/thumbnails/032/524/550/small_2x/kidney-bean-icon-vector.jpg"
                                         alt=""
+                                        style={{height:100}}
                                     />
                                 </Link>
                                 <button
@@ -51,7 +52,7 @@ const ResponsiveHeader = ({ fixed }) => {
                                             className="flex items-center uppercase font-bold leading-snug primary-color hover:opacity-75 px-6 py-4 hover:bg-blue-200 cursor-pointer border mx-1 text-lg"
                                             to="/about-us"
                                         >
-                                            About Us
+                                            Treatments
                                         </Link>
                                     </li>
                                     <li className="nav-item">
@@ -59,10 +60,10 @@ const ResponsiveHeader = ({ fixed }) => {
                                             className="flex items-center uppercase font-bold leading-snug primary-color hover:opacity-75 px-6 py-4 hover:bg-blue-200 cursor-pointer border mx-1 text-lg"
                                             to="/services"
                                         >
-                                            Services
+                                            Campaigns
                                         </Link>
                                     </li>
-                                    <li className="nav-item">
+                                    {/* <li className="nav-item">
                                         <Link
                                             className="flex items-center uppercase font-bold leading-snug primary-color hover:opacity-75 px-6 py-4 hover:bg-blue-200 cursor-pointer border mx-1 text-lg"
                                             to="/doctors"
@@ -77,7 +78,7 @@ const ResponsiveHeader = ({ fixed }) => {
                                         >
                                             Contact
                                         </Link>
-                                    </li>
+                                    </li> */}
                                 </ul>
                             </div>
                         </div>

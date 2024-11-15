@@ -12,9 +12,9 @@ const SingleService = props => {
             />
             <h2 className="text-2xl font-bold primary-color py-3">{title}</h2>
             <p className="text-justify leading-7">{description}</p>
-            <button className="bg-color text-white px-4 py-2 my-4 rounded">
+            {/* <button className="bg-color text-white px-4 py-2 my-4 rounded">
                 <NavLink to={`/services/${id}`}>More Info</NavLink>
-            </button>
+            </button> */}
         </div>
     );
 };

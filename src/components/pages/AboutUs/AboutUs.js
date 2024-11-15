@@ -6,10 +6,10 @@ const AboutUs = () => {
     return (
         <div className="pb-24">
             <div className="py-12">
-                <h2 className="text-center text-6xl">About US</h2>
+                <h2 className="text-center text-6xl">Treatments</h2>
             </div>
             <AboutUsFirst></AboutUsFirst>
-            <AboutUsSecond></AboutUsSecond>
+            {/* <AboutUsSecond></AboutUsSecond> */}
         </div>
     );
 };

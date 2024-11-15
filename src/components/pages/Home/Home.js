@@ -13,13 +13,13 @@ const Home = () => {
                 <Schedule></Schedule>
             </div> */}
             <WelcomeSection></WelcomeSection>
-            <ServiceSection></ServiceSection>
+            {/* <ServiceSection></ServiceSection> */}
             {/* <BestPracticeSection></BestPracticeSection>
             <TestSection></TestSection>
             <Departments></Departments>
             <ChooseUsSection></ChooseUsSection> */}
-            <MeetDoctorSection></MeetDoctorSection>
-            <AppointmentSection></AppointmentSection>
+            {/* <MeetDoctorSection></MeetDoctorSection> */}
+            {/* <AppointmentSection></AppointmentSection> */}
         </div>
     );
 };

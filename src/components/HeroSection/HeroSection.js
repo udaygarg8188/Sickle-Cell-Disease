@@ -16,13 +16,10 @@ const HeroSection = () => {
                 <div className="w-full md:w-2/4">
                     <div className="glass-effect rounded-md my-12 p-8">
                         <h1 className="text-3xl md:text-6xl primary-color font-semibold my-4">
-                            Find The Best Doctor Near By You!
+                            What is Sickle Cell Disease?
                         </h1>
                         <p className="text-white text-base md:text-xl leading-7">
-                            Qualified doctors available six days a week, view
-                            our timetable to make an appointment. Please feel
-                            free to contact our friendly reception staff with
-                            any general or medical enquiry.
+                        Sickle cell disease (SCD) is a genetic blood disorder characterized by the production of abnormal hemoglobin (hemoglobin S), which causes red blood cells to become rigid and sickle-shaped. This leads to blockages in blood vessels, resulting in pain, anemia, and increased risk of infections and complications. It is inherited in an autosomal recessive pattern and primarily affects individuals of African, Mediterranean, and Middle Eastern descent.
                         </p>
                     </div>
                 </div>
