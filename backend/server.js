@@ -82,7 +82,7 @@ app.use(cors({
 app.use(bodyParser.json());
 
 // Hugging Face API configuration
-const HF_API_KEY = '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'; // Replace with your Hugging Face API key
+const HF_API_KEY = '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'; // Replace with your Hugging Face API key
 const HF_MODEL = 'gpt2'; // You can replace this with any Hugging Face model like 'gpt-neo', 'distilgpt2', etc.
 
 // Function to generate a response from Hugging Face
