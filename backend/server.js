@@ -1,136 +1,85 @@
-// const express = require('express');
-// const bodyParser = require('body-parser');
-// const cors = require('cors');
-// const fetch = require('node-fetch'); // Importing node-fetch to make HTTP requests
-
-// // Initialize express app
-// const app = express();
-// const port = 3000;
-
-// // Use CORS to allow requests from frontend (port 3001)
-// app.use(cors({
-//   origin: 'http://localhost:3001', // Allow requests from the frontend (localhost:3001)
-//   methods: 'GET,POST',
-// }));
-
-// // Middleware to parse incoming JSON requests
-// app.use(bodyParser.json());
-
-// // Hugging Face API configuration
-// const HF_API_KEY = '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'; // Replace with your Hugging Face API key
-// const HF_MODEL = 'gpt2'; // You can replace this with any Hugging Face model like 'gpt-neo', 'distilgpt2', etc.
-
-// // Function to generate a response from Hugging Face
-// const getChatbotResponse = async (userMessage) => {
-//   try {
-//     const response = await fetch(`https://api-inference.huggingface.co/models/${HF_MODEL}`, {
-//       method: 'POST',
-//       headers: {
-//         'Authorization': `Bearer ${HF_API_KEY}`,
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify({ inputs: userMessage }),
-//     });
-
-//     if (!response.ok) {
-//       throw new Error('Failed to generate response');
-//     }
-
-//     const data = await response.json();
-//     return data[0].generated_text; // Depending on the model, you might need to adjust the response data
-//   } catch (error) {
-//     console.error('Error with Hugging Face API:', error);
-//     throw new Error('Unable to generate response');
-//   }
-// };
-
-// // POST endpoint for chatting
-// app.post('/api/chat', async (req, res) => {
-//   const { message } = req.body;
-
-//   if (!message) {
-//     return res.status(400).json({ error: 'Message is required' });
-//   }
-
-//   try {
-//     const chatbotReply = await getChatbotResponse(message);
-//     res.json({ reply: chatbotReply });
-//   } catch (error) {
-//     res.status(500).json({ error: 'Unable to generate response' });
-//   }
-// });
-
-// // Start server on port 3000
-// app.listen(port, () => {
-//   console.log(`Chatbot server running at http://localhost:${port}`);
-// });
 const express = require('express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
+const fetch = require('node-fetch');
+require('dotenv').config(); // Load environment variables
 
-// Initialize express app
 const app = express();
-const port = 3000;
 
-// Use CORS to allow requests from frontend (port 3001)
-app.use(cors({
-  origin: 'http://localhost:3001', // Allow requests from the frontend (localhost:3001)
-  methods: 'GET,POST',
-}));
-
-// Middleware to parse incoming JSON requests
-app.use(bodyParser.json());
+app.use(cors({ origin: 'http://localhost:3001' }));
+app.use(express.json());
 
 // Hugging Face API configuration
-const HF_API_KEY = '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'; // Replace with your Hugging Face API key
-const HF_MODEL = 'gpt2'; // You can replace this with any Hugging Face model like 'gpt-neo', 'distilgpt2', etc.
+const HF_API_KEY = process.env.HF_API_KEY; // Use the API key from .env
+const HF_MODEL = 'facebook/blenderbot-400M-distill'; // Updated model
 
-// Function to generate a response from Hugging Face
 const getChatbotResponse = async (userMessage) => {
     try {
+        console.log('User Message:', userMessage);
+
         const response = await fetch(`https://api-inference.huggingface.co/models/${HF_MODEL}`, {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${HF_API_KEY}`,
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${HF_API_KEY}`,
             },
-            body: JSON.stringify({ inputs: userMessage }),
+            body: JSON.stringify({
+                inputs: userMessage,
+                parameters: {
+                    max_new_tokens: 150,
+                    temperature: 0.7,
+                    top_p: 0.9,
+                    repetition_penalty: 1.2,
+                },
+                options: {
+                    wait_for_model: true,
+                },
+            }),
         });
 
+        const data = await response.json();
+        console.log('Hugging Face Response:', data);
+
         if (!response.ok) {
-            throw new Error(`Failed to generate response: ${response.statusText}`);
+            console.error('API Error:', data);
+            throw new Error(`Failed to generate response: ${data.error || response.statusText}`);
         }
 
-        const data = await response.json();
         if (data.error) {
             throw new Error(`Error from Hugging Face: ${data.error}`);
         }
 
-        console.log('Received from Hugging Face:', data); // Log the full response
-        return data[0]?.generated_text || 'No response generated'; // Ensure to handle undefined or empty responses
+        // For BlenderBot and similar models
+        if (data.generated_text) {
+            return data.generated_text.trim();
+        }
+
+        // For models that return a response array
+        if (Array.isArray(data) && data.length > 0 && data[0].generated_text) {
+            return data[0].generated_text.trim();
+        }
+
+        return 'No response generated.';
     } catch (error) {
-        console.error('Error with Hugging Face API:', error.message); // Log detailed error message
-        throw new Error('Unable to generate response');
+        console.error('Detailed Error:', error.message);
+        throw new Error('Unable to generate response from Hugging Face API');
     }
 };
 
-// POST endpoint for chatting
 app.post('/api/chat', async (req, res) => {
-  const { message } = req.body;
+    const { message } = req.body;
 
-  if (!message) {
-    return res.status(400).json({ error: 'Message is required' });
-  }
+    if (!message || typeof message !== 'string') {
+        return res.status(400).json({ error: 'Invalid message format' });
+    }
 
-  try {
-    const chatbotReply = await getChatbotResponse(message);
-    res.json({ reply: chatbotReply });
-  } catch (error) {
-    res.status(500).json({ error: 'Unable to generate response' });
-  }
+    try {
+        const formattedMessage = `User: ${message}\nAI:`;
+        const reply = await getChatbotResponse(formattedMessage);
+        res.json({ reply });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 });
 
-// Start server on port 3000
-app.listen(port, () => {
-  console.log(`Chatbot server running at http://localhost:${port}`);
-});
+const PORT = 3002;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
